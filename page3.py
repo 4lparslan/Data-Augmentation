@@ -11,21 +11,25 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
+
 class Ui_add_augmentation(object):
     def setupUi(self, add_augmentation):
         add_augmentation.setObjectName("add_augmentation")
-        add_augmentation.resize(404, 441)
+        add_augmentation.resize(404, 498)
         self.listWidget_aug = QtWidgets.QListWidget(add_augmentation)
-        self.listWidget_aug.setGeometry(QtCore.QRect(80, 110, 251, 241))
+        self.listWidget_aug.setGeometry(QtCore.QRect(80, 180, 261, 241))
         self.listWidget_aug.setObjectName("listWidget_aug")
         self.pushButton_addaug = QtWidgets.QPushButton(add_augmentation)
-        self.pushButton_addaug.setGeometry(QtCore.QRect(80, 20, 251, 71))
+        self.pushButton_addaug.setGeometry(QtCore.QRect(80, 20, 261, 61))
         self.pushButton_addaug.setStyleSheet("background-color: rgb(138, 226, 52);")
         self.pushButton_addaug.setObjectName("pushButton_addaug")
         self.pushButton_removeaug = QtWidgets.QPushButton(add_augmentation)
-        self.pushButton_removeaug.setGeometry(QtCore.QRect(80, 370, 251, 51))
+        self.pushButton_removeaug.setGeometry(QtCore.QRect(80, 100, 261, 61))
         self.pushButton_removeaug.setStyleSheet("background-color: rgb(239, 41, 41);")
         self.pushButton_removeaug.setObjectName("pushButton_removeaug")
+        self.pushButton_next = QtWidgets.QPushButton(add_augmentation)
+        self.pushButton_next.setGeometry(QtCore.QRect(120, 444, 181, 31))
+        self.pushButton_next.setObjectName("pushButton_next")
 
         self.retranslateUi(add_augmentation)
         QtCore.QMetaObject.connectSlotsByName(add_augmentation)
@@ -35,6 +39,7 @@ class Ui_add_augmentation(object):
         add_augmentation.setWindowTitle(_translate("add_augmentation", "Select Augmentation Methods"))
         self.pushButton_addaug.setText(_translate("add_augmentation", "Add Augmentation Step"))
         self.pushButton_removeaug.setText(_translate("add_augmentation", "Remove Selected Step"))
+        self.pushButton_next.setText(_translate("add_augmentation", "Go To Next Step"))
 
 
 if __name__ == "__main__":
