@@ -96,7 +96,6 @@ class Brightness:
 
 class Rotate:
 	def __init__(self, image=None, angle=None, annotation=None):
-		self.process = None
 		self.angle = angle
 		self.img = image
 		self.annotation = annotation
@@ -104,16 +103,14 @@ class Rotate:
 		self.height = self.img.shape[0]
 		self.width = self.img.shape[1]
 
-		if self.angle == 90:
-			self.process = cv2.ROTATE_90_CLOCKWISE
-		elif self.angle == 180:
-			self.process = cv2.ROTATE_180
-		elif self.angle == 270:
-			self.process = cv2.ROTATE_90_COUNTERCLOCKWISE
-
 	def ApplyRotate(self):
-		self.img = cv2.rotate(self.img, self.process)
-		
+		if self.angle == 90:
+			self.img = cv2.rotate(self.img, cv2.ROTATE_90_CLOCKWISE)
+		elif self.angle == 180:
+			self.img = cv2.rotate(self.img, cv2.ROTATE_180)	
+		elif self.angle == 270:
+			self.img = cv2.rotate(self.img, cv2.ROTATE_90_COUNTERCLOCKWISE)	
+
 		for bbox in self.annotation:
 			rotated_bbox = self.Rotate_Bbox(bbox)
 			self.new_annotation.append(rotated_bbox)

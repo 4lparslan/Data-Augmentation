@@ -71,10 +71,10 @@ def Augmentation_Worker(output_param= None, dataset_input=None, aug_list=None, o
 					p2 = random.choice([True, False])
 					p1 = True if p1 == False and p2 == False else p1
 					a = Flip(the_img, p1, p2, the_annots)
-					the_img = a.ApplyFlip()
+					the_img, the_annots = a.ApplyFlip()
 				else:
 					a = Flip(the_img, augmentation_list['flip'][0], augmentation_list['flip'][1], the_annots)
-					the_img = a.ApplyFlip()
+					the_img, the_annots = a.ApplyFlip()
 			elif process == "hue":
 				a = Hue(augmentation_list['hue'], the_img)
 				the_img = a.ApplyHue()
@@ -83,26 +83,28 @@ def Augmentation_Worker(output_param= None, dataset_input=None, aug_list=None, o
 				the_img = a.ApplyNoise()
 			elif process == "rotation":
 				angle = 0
-				if augmentation_list['rotation'].count(True) > 1:
-					index_list = [i for i, value in enumerate(augmentation_list['rotation']) if value]
+				if augmentation_list['rotation'].count('True') > 1:
+					index_list = [i for i, value in enumerate(augmentation_list['rotation']) if value=='True']
 					random_index = random.choice(index_list)
 					angle = 90 if random_index == 0 else (180 if random_index == 2 else 270)
 				else:
-					if augmentation_list['rotation'][0] == True:
+					if augmentation_list['rotation'][0] == 'True':
 						angle = 90
-					elif augmentation_list['rotation'][1] == True:
+					elif augmentation_list['rotation'][1] == 'True':
 						angle = 270
-					elif augmentation_list['rotation'][2] == True:
+					elif augmentation_list['rotation'][2] == 'True':
 						angle = 180
+					else:
+						print("NO WAY")
 				
 				a = Rotate(the_img, angle, the_annots)
-				the_img = a.ApplyRotate()
+				the_img, the_annots = a.ApplyRotate()
 			elif process == "saturation":
 				a = Saturation(augmentation_list['saturation'], the_img)
 				the_img = a.ApplySaturation()
 			elif process == "sensitive_rotation":
 				a = SensitiveRotate(the_img, augmentation_list['sensitive_rotation'], the_annots)
-				the_img = a.ApplySensitiveRotate()
+				the_img, the_annots = a.ApplySensitiveRotate()
 			elif process == "grayscale":
 				a = Grayscale(the_img)
 				the_img = a.ApplyGrayscale()
@@ -111,7 +113,8 @@ def Augmentation_Worker(output_param= None, dataset_input=None, aug_list=None, o
 				break
 					
 		#Save images
-		cv2.imwrite(os.path.join(output_folder, f"{file_name}.jpg"), the_img)
+		tempo = os.path.join(output_folder, f"{file_name}.jpg")
+		cv2.imwrite(tempo, the_img)
 		#Save annotations
 		annot_out_name = os.path.join(output_folder, f"{file_name}.txt")
 		annot_out_file = open(annot_out_name, 'w')
