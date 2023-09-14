@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>666</width>
-    <height>604</height>
+    <height>744</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -154,17 +154,25 @@
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="pushButton_prepare">
    <property name="geometry">
     <rect>
-     <x>490</x>
-     <y>490</y>
-     <width>81</width>
+     <x>200</x>
+     <y>630</y>
+     <width>291</width>
      <height>61</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <property name="text">
-    <string>OK</string>
+    <string>Prepare Augmented Dataset</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_7">
@@ -272,7 +280,7 @@
     <string>Total number of image:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_total">
+  <widget class="QLabel" name="label_total_number">
    <property name="geometry">
     <rect>
      <x>240</x>
@@ -302,6 +310,77 @@
    </property>
    <property name="text">
     <string>(Follow this order for arranging: Test - Validation - Train)</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_output_path">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>570</y>
+     <width>331</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>Choose a Path to Create Output Folder </string>
+   </property>
+  </widget>
+  <widget class="Line" name="line_2">
+   <property name="geometry">
+    <rect>
+     <x>-70</x>
+     <y>530</y>
+     <width>741</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_output_path">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>710</y>
+     <width>571</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(52, 101, 164);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_null">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>388</y>
+     <width>31</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>X</string>
    </property>
   </widget>
  </widget>

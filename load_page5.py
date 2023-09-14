@@ -1,16 +1,25 @@
 from PyQt5.QtWidgets import *
 from page5 import Ui_Form
-from PyQt5.QtCore import pyqtSignal
 from load_page6 import Page6
+from augmentation_worker import Augmentation_Worker
 
 class Page5(QWidget):
-    page5to3_signal = pyqtSignal(int, int, int, int)
-    def __init__(self):
+    def __init__(self, input_path, aug_list):
         super().__init__()
         self.p5 = Ui_Form()
         self.p5.setupUi(self)
 
+        # all parameters
+        self.output_parameters = {}
+        self.dataset_input_path = input_path
+        self.augmentation_list = aug_list
+        self.output_path = None
+
         self.page6_run = Page6()
+        self.selected_output_path = ""
+        self.p5.pushButton_output_path.clicked.connect(self.ShowFolderDialog)
+        self.p5.pushButton_prepare.setEnabled(False)
+        self.p5.pushButton_prepare.clicked.connect(self.ShowPage6)
 
         self.p5.horizontalSlider_train.setValue(70)
         self.p5.horizontalSlider_validation.setValue(20)
@@ -21,7 +30,7 @@ class Page5(QWidget):
         self.p5.horizontalSlider_validation.valueChanged.connect(self.updateSliders)
         self.p5.horizontalSlider_test.valueChanged.connect(self.updateSliders)
         self.updateSliders()
-        self.p5.pushButton.clicked.connect(self.ShowPage6)
+
 
     def updateSliders(self):
         total = self.p5.horizontalSlider_train.value() + self.p5.horizontalSlider_validation.value() + self.p5.horizontalSlider_test.value()
@@ -85,6 +94,22 @@ class Page5(QWidget):
         val2 = self.p5.horizontalSlider_validation.value()
         val3 = self.p5.horizontalSlider_test.value()
         val4 = self.p5.horizontalSlider_size.value()
-        self.page5to3_signal.emit(val1, val2, val3, val4)
-        self.close()
+        self.output_parameters['train'] = val1
+        self.output_parameters['validation'] = val2
+        self.output_parameters['test'] = val3
+        self.output_parameters['size'] = val4
+        self.output_path = self.p5.label_output_path.text()
+
+        ### Augmentation'ı başlatacak fonksiyonu burada ÇAĞIR
+        Augmentation_Worker(output_param= self.output_parameters, dataset_input=self.dataset_input_path, aug_list=self.augmentation_list, out_path=self.output_path)
+
         self.page6_run.show()
+
+    def ShowFolderDialog(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.ReadOnly
+        folder_path = QFileDialog.getExistingDirectory(self, 'Choose Folder', '', options=options)
+        if folder_path:
+            self.selected_output_path = folder_path
+            self.p5.label_output_path.setText(self.selected_output_path)
+            self.p5.pushButton_prepare.setEnabled(True)

@@ -14,26 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(672, 236)
-        self.pushButton_output_path = QtWidgets.QPushButton(Form)
-        self.pushButton_output_path.setGeometry(QtCore.QRect(110, 30, 451, 41))
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.pushButton_output_path.setFont(font)
-        self.pushButton_output_path.setStyleSheet("background-color: rgb(114, 159, 207);")
-        self.pushButton_output_path.setObjectName("pushButton_output_path")
-        self.label_output_path = QtWidgets.QLabel(Form)
-        self.label_output_path.setGeometry(QtCore.QRect(50, 90, 571, 20))
-        self.label_output_path.setStyleSheet("color: rgb(52, 101, 164);")
-        self.label_output_path.setText("")
-        self.label_output_path.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_output_path.setObjectName("label_output_path")
-        self.pushButton_prepare = QtWidgets.QPushButton(Form)
-        self.pushButton_prepare.setGeometry(QtCore.QRect(250, 130, 161, 41))
-        self.pushButton_prepare.setStyleSheet("background-color: rgb(115, 210, 22);")
-        self.pushButton_prepare.setObjectName("pushButton_prepare")
+        Form.resize(389, 100)
         self.progressBar = QtWidgets.QProgressBar(Form)
-        self.progressBar.setGeometry(QtCore.QRect(190, 190, 281, 23))
+        self.progressBar.setGeometry(QtCore.QRect(20, 30, 351, 41))
         self.progressBar.setProperty("value", 24)
         self.progressBar.setObjectName("progressBar")
 
@@ -42,9 +25,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Get Outputs"))
-        self.pushButton_output_path.setText(_translate("Form", "Choose a Path to Create Output Folder "))
-        self.pushButton_prepare.setText(_translate("Form", "Prepare the Dataset"))
+        Form.setWindowTitle(_translate("Form", "Preparing..."))
 
 
 if __name__ == "__main__":

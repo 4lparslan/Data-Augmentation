@@ -1,104 +1,61 @@
-import os
-import cv2
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QPixmap, QImage, QPainter, QPen, QColor
-from PyQt5 import QtCore
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'page2.ui'
+#
+# Created by: PyQt5 UI code generator 5.14.1
+#
+# WARNING! All changes made in this file will be lost!
 
 
-class ObjectDetectionViewer(QMainWindow):
-    def __init__(self, image_folder, annotation_folder):
-        super().__init__()
-
-        self.image_folder = image_folder
-        self.annotation_folder = annotation_folder
-        self.image_files = sorted([f for f in os.listdir(image_folder) if f.endswith(('.jpg', '.jpeg', '.png'))])
-        self.current_image_index = 0
-        self.annotations = []
-        self.image = None
-
-        self.initUI()
-        self.loadAnnotations()
-        self.displayImageWithAnnotations()
-
-    def initUI(self):
-        self.setWindowTitle('Nesne Tespiti Görüntüleyici')
-        self.setGeometry(100, 100, 1280, 720)  # Pencere boyutunu 1920x1080 olarak ayarlayın
-
-        self.image_label = QLabel(self)
-        self.image_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.image_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-
-        self.prev_button = QPushButton('Önceki Resim', self)
-        self.prev_button.clicked.connect(self.showPreviousImage)
-
-        self.next_button = QPushButton('Sonraki Resim', self)
-        self.next_button.clicked.connect(self.showNextImage)
-
-        layout = QVBoxLayout()
-        layout.addWidget(self.image_label)
-        layout.addWidget(self.prev_button)
-        layout.addWidget(self.next_button)
-
-        central_widget = QWidget()
-        central_widget.setLayout(layout)
-        self.setCentralWidget(central_widget)
-
-    def loadAnnotations(self):
-        annotation_file = os.path.join(self.annotation_folder, f"{self.image_files[self.current_image_index][:-4]}.txt")
-        self.annotations = []  # Annotation bilgilerini sıfırlayın
-        if os.path.exists(annotation_file):
-            with open(annotation_file, 'r') as f:
-                lines = f.readlines()
-                for line in lines:
-                    parts = line.strip().split()
-                    if len(parts) == 5:
-                        class_id, x_center, y_center, width, height = map(float, parts)
-
-                        img_width, img_height = self.image.shape[1], self.image.shape[0]  # 'self.image' kullanın
-                        x = int((x_center - width / 2) * img_width)
-                        y = int((y_center - height / 2) * img_height)
-                        w = int(width * img_width)
-                        h = int(height * img_height)
-
-                        self.annotations.append((x, y, w, h))
-
-    def showPreviousImage(self):
-        if self.current_image_index > 0:
-            self.current_image_index -= 1
-            self.loadAnnotations()
-            self.displayImageWithAnnotations()
-
-    def showNextImage(self):
-        if self.current_image_index < len(self.image_files) - 1:
-            self.current_image_index += 1
-            self.loadAnnotations()
-            self.displayImageWithAnnotations()
-
-    def displayImageWithAnnotations(self):
-        image_path = os.path.join(self.image_folder, self.image_files[self.current_image_index])
-        self.image = cv2.imread(image_path)  # 'self.image' değişkenini burada tanımlayın
-
-        for annotation in self.annotations:
-            x, y, w, h = annotation
-            color = (0, 255, 0)  # Bounding box rengi (örneğin, yeşil)
-            thickness = 2
-            cv2.rectangle(self.image, (x, y), (x + w, y + h), color, thickness)
-
-        height, width, channel = self.image.shape
-        bytes_per_line = 3 * width
-        q_image = QImage(self.image.data, width, height, bytes_per_line, QImage.Format_RGB888)
-        pixmap = QPixmap.fromImage(q_image)
-        self.image_label.setPixmap(pixmap)
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-def main():
-    app = QApplication([])
-    image_folder = "/home/alp/Desktop/dataset"
-    annotation_folder = "/home/alp/Desktop/dataset"
-    window = ObjectDetectionViewer(image_folder, annotation_folder)
-    window.show()
-    app.exec_()
+class Ui_Form(object):
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.setWindowState(QtCore.Qt.WindowFullScreen)
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(Form)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.label_img = QtWidgets.QLabel(Form)
+        self.label_img.setText("")
+        self.label_img.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_img.setObjectName("label_img")
+        self.verticalLayout_2.addWidget(self.label_img)
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.pushButton_prev = QtWidgets.QPushButton(Form)
+        self.pushButton_prev.setObjectName("pushButton_prev")
+        self.horizontalLayout.addWidget(self.pushButton_prev)
+        self.pushButton_next = QtWidgets.QPushButton(Form)
+        self.pushButton_next.setObjectName("pushButton_next")
+        self.horizontalLayout.addWidget(self.pushButton_next)
+        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.pushButton_approve = QtWidgets.QPushButton(Form)
+        self.pushButton_approve.setObjectName("pushButton_approve")
+        self.verticalLayout.addWidget(self.pushButton_approve)
+        self.verticalLayout_2.addLayout(self.verticalLayout)
+        self.horizontalLayout_2.addLayout(self.verticalLayout_2)
+
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+
+    def retranslateUi(self, Form):
+        _translate = QtCore.QCoreApplication.translate
+        Form.setWindowTitle(_translate("Form", "Show Dataset"))
+        self.pushButton_prev.setText(_translate("Form", "Previous"))
+        self.pushButton_next.setText(_translate("Form", "Next"))
+        self.pushButton_approve.setText(_translate("Form", "Go To Next Step"))
 
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

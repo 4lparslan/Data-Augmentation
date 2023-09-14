@@ -107,11 +107,14 @@
   <widget class="QPushButton" name="pushButton_shear">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>150</y>
+     <x>260</x>
+     <y>260</y>
      <width>81</width>
      <height>81</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>Shear</string>
@@ -126,6 +129,9 @@
      <height>81</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <property name="text">
     <string>Exposure</string>
    </property>
@@ -133,8 +139,8 @@
   <widget class="QPushButton" name="pushButton_grayscale">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>260</y>
+     <x>150</x>
+     <y>150</y>
      <width>81</width>
      <height>81</height>
     </rect>
@@ -151,6 +157,9 @@
      <width>81</width>
      <height>81</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>Contrast</string>

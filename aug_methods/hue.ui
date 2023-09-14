@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>669</width>
-    <height>494</height>
+    <width>421</width>
+    <height>482</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>350</y>
+     <x>30</x>
+     <y>340</y>
      <width>81</width>
      <height>17</height>
     </rect>
@@ -29,14 +29,14 @@
   <widget class="QSlider" name="horizontalSlider_hue">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>350</y>
+     <x>80</x>
+     <y>340</y>
      <width>271</width>
      <height>16</height>
     </rect>
    </property>
    <property name="maximum">
-    <number>180</number>
+    <number>179</number>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
@@ -45,8 +45,8 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>350</y>
+     <x>380</x>
+     <y>340</y>
      <width>31</width>
      <height>17</height>
     </rect>
@@ -58,8 +58,8 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>390</y>
+     <x>170</x>
+     <y>380</y>
      <width>71</width>
      <height>61</height>
     </rect>
@@ -68,11 +68,11 @@
     <string>OK</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_img_dec">
+  <widget class="QLabel" name="label_img">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>50</y>
+     <x>90</x>
+     <y>40</y>
      <width>261</width>
      <height>271</height>
     </rect>
@@ -82,48 +82,6 @@
    </property>
    <property name="pixmap">
     <pixmap>img.png</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_img_inc">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>50</y>
-     <width>261</width>
-     <height>271</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap>img.png</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>30</y>
-     <width>21</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>-</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>470</x>
-     <y>30</y>
-     <width>21</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>+</string>
    </property>
   </widget>
  </widget>

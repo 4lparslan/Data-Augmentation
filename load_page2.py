@@ -1,16 +1,17 @@
+import os
+import cv2
+from natsort import natsorted
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPixmap, QImage
 from page2 import Ui_Form
 from load_page3 import Page3
-import os
-import cv2
 
 class Page2(QWidget):
 	def __init__(self, data=None, WinSize= []):
 		super().__init__()
 		self.p2 = Ui_Form()
 		self.p2.setupUi(self)
-		self.page3_run = Page3()
+		self.page3_run = Page3(data)
 		self.p2.pushButton_approve.clicked.connect(self.ShowPage3)
 		self.input_path = data
 		self.current_image_index = 0
@@ -19,8 +20,7 @@ class Page2(QWidget):
 		self.screen_width = WinSize[0]
 		self.screen_height = WinSize[1]
 
-		self.image_files = sorted([f for f in os.listdir(self.input_path) if f.endswith(('.jpg', '.jpeg', '.png'))])
-
+		self.image_files = natsorted([f for f in os.listdir(self.input_path) if f.endswith(('.jpg', '.jpeg', '.png'))])
 		self.p2.pushButton_prev.clicked.connect(self.showPreviousImage)
 		self.p2.pushButton_next.clicked.connect(self.showNextImage)
 
@@ -105,10 +105,6 @@ class Page2(QWidget):
 		else:
 			print("NO WAY")
 			
-
-
-
-		
 	def convert_cvimage_to_qpixmap(self, cv_image):
 		height, width, channel = cv_image.shape
 		bytes_per_line = 3 * width
