@@ -23,13 +23,13 @@ class Flip:
 	def ApplyFlip(self):
 		height, width, channels = self.img.shape
 
-		if self.horizontal and self.vertical:
+		if self.horizontal == "True" and self.vertical == "True":
 			self.img = cv2.flip(self.img, 0)
 			self.img = cv2.flip(self.img, 1)
 
-		elif self.horizontal:
+		elif self.horizontal == "True":
 			self.img = cv2.flip(self.img, 1)
-		elif self.vertical:
+		elif self.vertical == "True":
 			self.img = cv2.flip(self.img, 0)
 		else:
 			print("debug")
@@ -190,4 +190,5 @@ class Grayscale:
 
 	def ApplyGrayscale(self):
 		self.img = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
+		self.img = cv2.cvtColor(self.img, cv2.COLOR_GRAY2RGB)
 		return self.img

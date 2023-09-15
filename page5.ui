@@ -384,7 +384,9 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="loading.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>horizontalSlider_train</sender>

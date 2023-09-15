@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from page5 import Ui_Form
 from load_page6 import Page6
 from augmentation_worker import Augmentation_Worker
+import os
 
 class Page5(QWidget):
     def __init__(self, input_path, aug_list):
@@ -21,6 +22,10 @@ class Page5(QWidget):
         self.p5.pushButton_prepare.setEnabled(False)
         self.p5.pushButton_prepare.clicked.connect(self.ShowPage6)
 
+        self.image_count = sum(1 for filename in os.listdir(self.dataset_input_path) if filename.lower().endswith(('.jpg', '.jpeg', '.png')))
+        self.p5.label_total_number.setText(str(2* (self.image_count)))
+        self.p5.horizontalSlider_size.valueChanged.connect(self.updateSizeValue)
+
         self.p5.horizontalSlider_train.setValue(70)
         self.p5.horizontalSlider_validation.setValue(20)
         self.p5.horizontalSlider_test.setValue(10)
@@ -30,6 +35,8 @@ class Page5(QWidget):
         self.p5.horizontalSlider_validation.valueChanged.connect(self.updateSliders)
         self.p5.horizontalSlider_test.valueChanged.connect(self.updateSliders)
         self.updateSliders()
+
+
 
 
     def updateSliders(self):
@@ -102,8 +109,9 @@ class Page5(QWidget):
 
         ### Augmentation'ı başlatacak fonksiyonu burada ÇAĞIR
         Augmentation_Worker(output_param= self.output_parameters, dataset_input=self.dataset_input_path, aug_list=self.augmentation_list, out_path=self.output_path)
-
+        self.close()
         self.page6_run.show()
+
 
     def ShowFolderDialog(self):
         options = QFileDialog.Options()
@@ -113,3 +121,7 @@ class Page5(QWidget):
             self.selected_output_path = folder_path
             self.p5.label_output_path.setText(self.selected_output_path)
             self.p5.pushButton_prepare.setEnabled(True)
+
+    def updateSizeValue(self):
+        size = self.p5.horizontalSlider_size.value()
+        self.p5.label_total_number.setText(str(size * self.image_count))
