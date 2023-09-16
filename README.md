@@ -27,9 +27,9 @@ Bu sayfada çeşitli metotları seçip parametre ayarlamaları yapabilirsiniz.
 ![Gösterim](Readme-Images/1.5.png)
 
 ### Örnek Blur Ayarlama Sayfası:
-Bu ekranda Blur sayfası örneğini görüyoruz.
+Bu ekranda Blur sayfası örneğini görüyoruz.<br />
 ![Gösterim](Readme-Images/2.png)
-<br />
+
 ### Örnek-2 Sensitive-Rotation Ayarlama Sayfası:
 Bu ekranda Sensitive-Rotation sayfası örneğini görüyoruz.
 ![Gösterim](Readme-Images/3.png)
