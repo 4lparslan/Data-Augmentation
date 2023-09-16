@@ -11,6 +11,12 @@ Bu projede Data Augmentation için PyQt uygulaması geliştirdim.
 İşte bu kadar!
 <br />
 
-### Açılış sayfası:
+### Açılış Sayfası:
 İşlenecek dataseti seçip anotasyon dosyalarının eksik olup olmadığını kontrol edin.
 ![Gösterim](Readme-Images/0.png)
+
+### Veriseti Görüntüleme Sayfası:
+İşlemlere başlamadan önce verisetinizi gözden geçirin.
+![Gösterim](Readme-Images/1.png)
+
+### Veriseti Görüntüleme Sayfası:
