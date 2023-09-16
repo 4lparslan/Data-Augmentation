@@ -35,20 +35,20 @@ Bu ekranda Sensitive-Rotation sayfası örneğini görüyoruz.
 ![Gösterim](Readme-Images/3.png)
 
 ### Örnek-3 Noise Ayarlama Sayfası:
-Bu ekranda Noise sayfası örneğini görüyoruz.
+Bu ekranda Noise sayfası örneğini görüyoruz.<br />
 ![Gösterim](Readme-Images/4.png)
-<br />
+
 ### Seçilenlere Tekrar Göz Atalım :
-Bu ekranda Noise sayfası örneğini görüyoruz.
+Bu ekranda Noise sayfası örneğini görüyoruz.<br />
 ![Gösterim](Readme-Images/5.png)
-<br />
+
 ### Çıktı Boyutunu ve Train-Test-Val Oranını Belirleme Sayfası :
 Bu sayfada çıktı olarak ne kadar veri oluşturulacağını ve train-validation-test oranını belirliyoruz. Ayrıca çıktı klasörünün nerede oluşturulacağını seçiyoruz.
 ![Gösterim](Readme-Images/6.png)
 
-Ardından `Prepare Augmented Dataset` tuşuna basıyoruz ve işlemler tamamlanana kadar bekliyoruz.
-
-
+Ardından `Prepare Augmented Dataset` tuşuna basıyoruz ve işlemler tamamlanana kadar bekliyoruz.<br />
+Ve işte örnek bir sonuç:
+![Gösterim](Readme-Images/7.png)
 
 
 
