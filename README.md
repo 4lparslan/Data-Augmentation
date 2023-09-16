@@ -21,12 +21,52 @@ Bu projede Data Augmentation için PyQt uygulaması geliştirdim.
 
 ### Augmentation Metotları Düzenleme Sayfası:
 Bu sayfada augmentation metotlarını ekleyebilir veya silebilirsiniz.
-![Gösterim](Readme-Images/5.png)
+![Gösterim](Readme-Images/2.5.png)
 
 ### Augmentation Metotları Seçim Sayfası:
 Bu sayfada çeşitli metotları seçip parametre ayarlamaları yapabilirsiniz.
 ![Gösterim](Readme-Images/1.5.png)
 
-### Örnek Augmentation Ayarlama Sayfası:
+### Örnek Blur Ayarlama Sayfası:
 Bu ekranda Blur sayfası örneğini görüyoruz.
-![Gösterim](Readme-Images/1.5.png)
+![Gösterim](Readme-Images/2.png)
+
+### Örnek-2 Sensitive-Rotation Ayarlama Sayfası:
+Bu ekranda Sensitive-Rotation sayfası örneğini görüyoruz.
+![Gösterim](Readme-Images/3.png)
+
+### Örnek-3 Noise Ayarlama Sayfası:
+Bu ekranda Noise sayfası örneğini görüyoruz.
+![Gösterim](Readme-Images/4.png)
+
+### Seçilenlere Tekrar Göz Atalım :
+Bu ekranda Noise sayfası örneğini görüyoruz.
+![Gösterim](Readme-Images/5.png)
+
+### Çıktı Boyutunu ve Train-Test-Val Oranını Belirleme Sayfası :
+Bu sayfada çıktı olarak ne kadar veri oluşturulacağını ve train-validation-test oranını belirliyoruz. Ayrıca çıktı klasörünün nerede oluşturulacağını seçiyoruz.
+![Gösterim](Readme-Images/6.png)
+
+Ardından `Prepare Augmented Dataset` tuşuna basıyoruz ve işlemler tamamlanana kadar bekliyoruz.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
