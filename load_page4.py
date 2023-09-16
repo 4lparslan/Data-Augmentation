@@ -3,7 +3,7 @@ from page4 import Ui_Form
 from PyQt5.QtCore import pyqtSignal
 
 import sys
-sys.path.append("/home/alp/PycharmProjects/QT-Project/venv/Data_Augmentation_App/aug_methods")
+sys.path.append("aug_methods")
 from load_blur import BlurPage
 from load_brightness import BrightPage
 from load_flip import FlipPage
@@ -72,8 +72,8 @@ class Page4(QWidget):
     def showBright(self):
         self.close()
         self.brightpage_run.show()
-    def BrightConfirm(self, val):
-        self.augmentation_list['brightness'] = val
+    def BrightConfirm(self, val, val2, val3):
+        self.augmentation_list['brightness'] = [val, val2, val3]
         self.page4to3_signal.emit('brightness')
 
     def showFlip(self):

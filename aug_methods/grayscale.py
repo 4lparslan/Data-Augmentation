@@ -21,7 +21,7 @@ class Ui_FormGrayscale(object):
         self.label_img = QtWidgets.QLabel(FormGrayscale)
         self.label_img.setGeometry(QtCore.QRect(70, 30, 261, 271))
         self.label_img.setText("")
-        self.label_img.setPixmap(QtGui.QPixmap("img.png"))
+        self.label_img.setPixmap(QtGui.QPixmap("aug_methods/img.png"))
         self.label_img.setObjectName("label_img")
         self.checkBox = QtWidgets.QCheckBox(FormGrayscale)
         self.checkBox.setGeometry(QtCore.QRect(150, 330, 92, 23))

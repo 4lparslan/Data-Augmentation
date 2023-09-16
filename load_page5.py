@@ -1,6 +1,5 @@
 from PyQt5.QtWidgets import *
 from page5 import Ui_Form
-from load_page6 import Page6
 from augmentation_worker import Augmentation_Worker
 import os
 
@@ -16,7 +15,6 @@ class Page5(QWidget):
         self.augmentation_list = aug_list
         self.output_path = None
 
-        self.page6_run = Page6()
         self.selected_output_path = ""
         self.p5.pushButton_output_path.clicked.connect(self.ShowFolderDialog)
         self.p5.pushButton_prepare.setEnabled(False)
@@ -43,10 +41,10 @@ class Page5(QWidget):
         total = self.p5.horizontalSlider_train.value() + self.p5.horizontalSlider_validation.value() + self.p5.horizontalSlider_test.value()
         remaining = 100 - total
 
-        sender = self.sender()  # Değişiklik yapan sliderı al
+        sender = self.sender()  # Take the slider that makes changes
 
         if total > 100:
-            # Toplam 100'den büyükse, fazla olan değeri diğer sliderlara dağıtın
+            # If the total is greater than 100, distribute the excess value to other sliders
             diff = total - 100
             if sender == self.p5.horizontalSlider_train:
                 if self.p5.horizontalSlider_validation.value() >= diff:
@@ -70,7 +68,7 @@ class Page5(QWidget):
                     self.p5.horizontalSlider_train.setValue(self.p5.horizontalSlider_train.value() - self.p5.horizontalSlider_train.value())
 
         elif total < 100:
-            # Toplam 100'den küçükse, kalan değeri diğer sliderlara dağıtın
+            # If total is less than 100, distribute remaining value to other sliders
             if sender == self.p5.horizontalSlider_train:
                 the_val = (100 - self.p5.horizontalSlider_validation.value())
                 if (100 - self.p5.horizontalSlider_validation.value()) >= remaining:
@@ -107,10 +105,10 @@ class Page5(QWidget):
         self.output_parameters['size'] = val4
         self.output_path = self.p5.label_output_path.text()
 
-        ### Augmentation'ı başlatacak fonksiyonu burada ÇAĞIR
+        ### Augmentation Time
         Augmentation_Worker(output_param= self.output_parameters, dataset_input=self.dataset_input_path, aug_list=self.augmentation_list, out_path=self.output_path)
         self.close()
-        self.page6_run.show()
+        QMessageBox.information(self, "INFO", "Creating augmented dataset was successful.")
 
 
     def ShowFolderDialog(self):

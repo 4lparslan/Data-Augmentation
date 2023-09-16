@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FormSensitiveRotation</class>
+ <widget class="QWidget" name="FormSensitiveRotation">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>651</width>
+    <height>563</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Sensitive Rotation</string>
+  </property>
+  <widget class="QSlider" name="horizontalSlider">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>410</y>
+     <width>311</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>45</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>460</y>
+     <width>89</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>410</y>
+     <width>31</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>20</y>
+     <width>21</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>-</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_img_dec">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>40</y>
+     <width>261</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>img.png</pixmap>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>20</y>
+     <width>21</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_img_inc">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>40</y>
+     <width>261</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>img.png</pixmap>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>410</y>
+     <width>67</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Rotation</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>330</y>
+     <width>471</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(239, 41, 41);</string>
+   </property>
+   <property name="text">
+    <string>Note: As the rotation amount increases, the gap between the bbox and the object increases and the bbox accuracy deteriorates.</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>horizontalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>227</x>
+     <y>305</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>356</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

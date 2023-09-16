@@ -31,10 +31,6 @@ class Flip:
 			self.img = cv2.flip(self.img, 1)
 		elif self.vertical == "True":
 			self.img = cv2.flip(self.img, 0)
-		else:
-			print("debug")
-			return None
-
 
 		for bbox in self.annotation:
 			flipped_bbox = self.Flip_Bbox(bbox)
@@ -43,14 +39,16 @@ class Flip:
 		return self.img, self.new_annotation
 
 	def Flip_Bbox(self, bbox=None):
-	    flipped_bbox = bbox
+		flipped_bbox = bbox
+		if self.horizontal == "True" and self.vertical == "True":
+			flipped_bbox = [self.width - flipped_bbox[0], self.height - flipped_bbox[1], self.width - flipped_bbox[2], self.height - flipped_bbox[3]]
 
-	    if self.horizontal:
-	        flipped_bbox = [self.height - flipped_bbox[2], flipped_bbox[1], self.height - flipped_bbox[0], flipped_bbox[3]]
-	    if self.vertical:
-	        flipped_bbox = [flipped_bbox[0], self.width - flipped_bbox[3], flipped_bbox[2], self.width - flipped_bbox[1]]
+		elif self.horizontal == "True":
+			flipped_bbox = [self.width - flipped_bbox[0], flipped_bbox[1], self.width - flipped_bbox[2], flipped_bbox[3]]
+		elif self.vertical == "True":
+			flipped_bbox = [flipped_bbox[0], self.height - flipped_bbox[1], flipped_bbox[2], self.height - flipped_bbox[3]]
 
-	    return flipped_bbox
+		return flipped_bbox
 
 class Noise:
 	def __init__(self, kernel_size=None, image=None):
@@ -86,8 +84,8 @@ class Saturation:
 		return self.img
 
 class Brightness:
-	def __init__(self, brightness_factor=None, image=None):
-		self.brightness_factor = (brightness_factor / 100) * 2
+	def __init__(self, brightness_factor=None, lighten=False, darken=False, image=None):
+		self.brightness_factor = (1.0 + (brightness_factor / 100)) if lighten=='True' else (1.0 - (brightness_factor / 100))
 		self.img = image
 
 	def ApplyBrightness(self):
@@ -119,17 +117,14 @@ class Rotate:
 
 
 	def Rotate_Bbox(self, bbox):
-		angle_rad = np.radians(self.angle)
 		x_min, y_min, x_max, y_max = bbox
-		image_center = (self.width / 2, self.height / 2)
-		rotation_matrix = cv2.getRotationMatrix2D(image_center, self.angle, 1)
 
-		rotated_x_min = int((x_min - image_center[0]) * np.cos(angle_rad) - (y_min - image_center[1]) * np.sin(angle_rad) + image_center[0])
-		rotated_y_min = int((x_min - image_center[0]) * np.sin(angle_rad) + (y_min - image_center[1]) * np.cos(angle_rad) + image_center[1])
-		rotated_x_max = int((x_max - image_center[0]) * np.cos(angle_rad) - (y_max - image_center[1]) * np.sin(angle_rad) + image_center[0])
-		rotated_y_max = int((x_max - image_center[0]) * np.sin(angle_rad) + (y_max - image_center[1]) * np.cos(angle_rad) + image_center[1])
-		
-		return [rotated_x_min, rotated_y_min, rotated_x_max, rotated_y_max]
+		if self.angle == 90:
+			return [self.height - y_min , x_min, self.height - y_max, x_max]
+		elif self.angle == 180:
+			return [self.width - x_min , self.height - y_min, self.width - x_max, self.height - y_max]
+		elif self.angle == 270:
+			return [y_min, self.width - x_min, y_max, self.width - x_max]
 
 class SensitiveRotate:
 	def __init__(self, image=None, angle=None, annotation=None):
@@ -141,7 +136,7 @@ class SensitiveRotate:
 		self.width = self.img.shape[1]
 
 	def ApplySensitiveRotate(self):
-		(cX, cY) = (self.width // 2, self.width // 2)
+		(cX, cY) = (self.width // 2, self.height // 2)
 		M = cv2.getRotationMatrix2D((cX, cY), self.angle, 1.0)
 		self.img = cv2.warpAffine(self.img, M, (self.width, self.height))
 
@@ -177,12 +172,29 @@ class SensitiveRotate:
 		rotated_a3_x = int((x_min - image_center[0]) * np.cos(angle_rad) - (y_max - image_center[1]) * np.sin(angle_rad) + image_center[0])
 		rotated_a3_y = int((x_min - image_center[0]) * np.sin(angle_rad) + (y_max - image_center[1]) * np.cos(angle_rad) + image_center[1])
 
+		# Relocate the points
 		new_x_min = min(rotated_a1_x, rotated_a2_x, rotated_a3_x, rotated_a4_x)
 		new_x_max = max(rotated_a1_x, rotated_a2_x, rotated_a3_x, rotated_a4_x)
 		new_y_min = min(rotated_a1_y, rotated_a2_y, rotated_a3_y, rotated_a4_y)
 		new_y_max = max(rotated_a1_y, rotated_a2_y, rotated_a3_y, rotated_a4_y)
 
+		# Check for image border breach
+		new_x_min = self.CheckForBreach(new_x_min, 0)
+		new_x_max = self.CheckForBreach(new_x_max, 0)
+		new_y_min = self.CheckForBreach(new_y_min, 1)
+		new_y_max = self.CheckForBreach(new_y_max, 1)
+
 		return [new_x_min, new_y_min, new_x_max, new_y_max]
+
+	def CheckForBreach(self, location, coord):
+		if location < 0:
+			location = 0
+		elif location > self.width and coord == 0:
+			location = self.width
+		elif location > self.height and coord == 1:
+			location = self.height
+		
+		return location
 
 class Grayscale:
 	def __init__(self, image=None):

@@ -36,7 +36,7 @@ def Augmentation_Worker(output_param= None, dataset_input=None, aug_list=None, o
 
 	# Per loop makes an augmented image
 	for i in range(augmentation_number):
-		#kaynak image olarak bir image birden çok kez kullanılabilir. Eğer tüm liste kullanılırsa random index alacak
+		# An image can be used multiple times as a source image. If the whole list is used it will get a random index
 		if current_index == len(image_files) or do_random:
 			do_random = True
 			current_index = random.randint(0, len(image_files)-1)
@@ -52,21 +52,27 @@ def Augmentation_Worker(output_param= None, dataset_input=None, aug_list=None, o
 
 
 		total_aug_num = len(augmentation_list)
-		# Kaç defa augmentation yapılacağını belirledik.
+		# We determined how many times augmentation would be performed.
 		aug_process_num = random.randint(1, total_aug_num)
 
 		counter = 0
 		for process in augmentation_list:
 			counter+=1
-
 			if process == "blur":
 				rand_value = random.randint(1, augmentation_list['blur'])
 				a = Blur(rand_value, the_img)
 				the_img = a.ApplyBlur()
 			elif process == "brightness":
-				rand_value = random.randint(1, augmentation_list['brightness'])
-				a = Brightness(rand_value, the_img)
-				the_img = a.ApplyBrightness()
+				if augmentation_list['brightness'][1] == 'True' and augmentation_list['brightness'][2] == 'True':
+					p1 = random.choice(['True', 'False'])
+					p2 = random.choice(['True', 'False'])
+					p1 = 'True' if p1 == 'False' and p2 == 'False' else p1
+					p1 = 'False' if p1 == 'True' and p2 == 'True' else p1
+					a = Brightness(augmentation_list['brightness'][0], p1, p2, the_img)
+					the_img = a.ApplyBrightness()
+				else:
+					a = Brightness(augmentation_list['brightness'][0], augmentation_list['brightness'][1], augmentation_list['brightness'][2], the_img)
+					the_img = a.ApplyBrightness()
 			elif process == "flip":
 				if augmentation_list['flip'][0] == 'True' and augmentation_list['flip'][1] == 'True':
 					p1 = random.choice(['True', 'False'])
@@ -97,10 +103,7 @@ def Augmentation_Worker(output_param= None, dataset_input=None, aug_list=None, o
 					elif augmentation_list['rotation'][1] == 'True':
 						angle = 270
 					elif augmentation_list['rotation'][2] == 'True':
-						angle = 180
-					else:
-						print("NO WAY")
-				
+						angle = 180				
 				a = Rotate(the_img, angle, the_annots)
 				the_img, the_annots = a.ApplyRotate()
 			elif process == "saturation":
@@ -109,18 +112,19 @@ def Augmentation_Worker(output_param= None, dataset_input=None, aug_list=None, o
 				the_img = a.ApplySaturation()
 			elif process == "sensitive_rotation":
 				rand_value = random.randint(1, augmentation_list['sensitive_rotation'])
+				rand_value = random.choice([rand_value, -rand_value])
 				a = SensitiveRotate(the_img, rand_value, the_annots)
 				the_img, the_annots = a.ApplySensitiveRotate()
 			elif process == "grayscale":
 				a = Grayscale(the_img)
 				the_img = a.ApplyGrayscale()
-
 			if counter == aug_process_num:
 				break
 					
 		#Save images
 		tempo = os.path.join(output_folder, f"{file_name}.jpg")
 		cv2.imwrite(tempo, the_img)
+
 		#Save annotations
 		annot_out_name = os.path.join(output_folder, f"{file_name}.txt")
 		annot_out_file = open(annot_out_name, 'w')
@@ -129,17 +133,14 @@ def Augmentation_Worker(output_param= None, dataset_input=None, aug_list=None, o
 			yolo_formmatted_annot = Pascal_voc_to_yolo(bbox[0], bbox[1], bbox[2], bbox[3], the_img.shape[1], the_img.shape[0])
 			yolo_formmatted_annot.insert(0, str(int(class_id)))
 			annot_to_print = " ".join(yolo_formmatted_annot)
-
-			
 			annot_out_file.write(annot_to_print)
 			annot_out_file.write('\n')
 		annot_out_file.close()
 
-
 		current_index+=1	
 		file_name+=1
 
-	#Orijinal dataseti ekle
+	#Add original dataset
 	for i in range(len(image_files)):
 		im = cv2.imread(image_files[i])
 		cv2.imwrite(os.path.join(output_folder, f"{file_name}.jpg"), im)
@@ -147,15 +148,13 @@ def Augmentation_Worker(output_param= None, dataset_input=None, aug_list=None, o
 		annot_out_name = os.path.join(output_folder, f"{file_name}.txt")
 		with open(annotation_files[i], "r") as source, open(annot_out_name, "w") as annot_out_file:
 			for line in source:
-				# Her satırı yazılacak dosyaya yaz
+				# Write each lines
 				annot_out_file.write(line)
 
 		file_name+=1
 
-	#train-val-test spliti yap
+	#train-val-test splitting
 	DatasetSplitter(output_path, output_parameters, output_folder)
-
-		
 
 def GetAnnotList(path, shape):
 	annotations = []
@@ -189,11 +188,9 @@ def DatasetSplitter(output_path, output_parameters, output_folder):
 	VAL_RATIO = output_parameters['validation']
 	TEST_RATIO = output_parameters['test']
 
-
 	all_images = []
 	for filename in os.listdir(output_folder):
 		if filename.endswith(".jpg"):
-		   # name= filename.split('.jpg')
 			fullname = os.path.join(output_folder, filename)
 			all_images.append(fullname)
 			

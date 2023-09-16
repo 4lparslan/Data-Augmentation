@@ -36,7 +36,7 @@ class Ui_FormNoise(object):
         self.label_img = QtWidgets.QLabel(FormNoise)
         self.label_img.setGeometry(QtCore.QRect(110, 30, 261, 271))
         self.label_img.setText("")
-        self.label_img.setPixmap(QtGui.QPixmap("img.png"))
+        self.label_img.setPixmap(QtGui.QPixmap("aug_methods/img.png"))
         self.label_img.setObjectName("label_img")
 
         self.retranslateUi(FormNoise)

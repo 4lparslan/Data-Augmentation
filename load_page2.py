@@ -33,7 +33,7 @@ class Page2(QWidget):
 
 		name, _ = self.image_files[self.current_image_index].rsplit('.', 1)
 		annotation_file = os.path.join(self.input_path, f"{name}.txt")
-		self.annotations = []  # Annotation bilgilerini sıfırlayın
+		self.annotations = []  
 		if os.path.exists(annotation_file):
 			with open(annotation_file, 'r') as f:
 				lines = f.readlines()
@@ -42,12 +42,11 @@ class Page2(QWidget):
 					if len(parts) == 5:
 						class_id, x_center, y_center, width, height = map(float, parts)
 
-						img_width, img_height = self.image.shape[1], self.image.shape[0]  # 'self.image' kullanın
+						img_width, img_height = self.image.shape[1], self.image.shape[0] 
 						x = int(x_center * img_width)
 						y = int(y_center * img_height)
 						w = int(width * img_width)
 						h = int(height * img_height)
-
 						self.annotations.append((x, y, w, h))
 
 	def showPreviousImage(self):
@@ -68,7 +67,7 @@ class Page2(QWidget):
 
 		for annotation in self.annotations:
 			x, y, w, h = annotation
-			color = (0, 255, 0)  # Bounding box rengi (örneğin, yeşil)
+			color = (0, 255, 0) 
 			thickness = 2
 			cv2.rectangle(self.image, (x - w // 2, y - h // 2), (x + w // 2, y + h // 2), color, thickness)
 
@@ -77,10 +76,10 @@ class Page2(QWidget):
 		target_height = 720
 
 		# If no need to resizing
-		if height < self.screen_height and width < self.screen_width:	# resim küçükse resize olmadan bas
+		if height < self.screen_height and width < self.screen_width:	# if image is small then do not resize
 			pixmap = self.convert_cvimage_to_qpixmap(self.image)
 			self.p2.label_img.setPixmap(pixmap)
-		elif height >= self.screen_height and width >= self.screen_width: # iki boyutu da büyükse daha büyük olanı baz alarak ekrana oturt ve diğerini oranla
+		elif height >= self.screen_height and width >= self.screen_width: # If both sizes are larger, fit the larger one to the screen and compare the other one.
 			if height >= width:
 				target_size = (int(target_height*(width/height)), target_height)
 				scaled_image = cv2.resize(self.image, target_size)
