@@ -42,7 +42,7 @@ Bu ekranda Noise sayfası örneğini görüyoruz.<br />
 Bu ekranda Noise sayfası örneğini görüyoruz.<br />
 ![Gösterim](Readme-Images/5.png)
 
-### Çıktı Boyutunu ve Train-Test-Val Oranını Belirleme Sayfası :
+### Çıktı Ayarlarını Belirleme Sayfası :
 Bu sayfada çıktı olarak ne kadar veri oluşturulacağını ve train-validation-test oranını belirliyoruz. Ayrıca çıktı klasörünün nerede oluşturulacağını seçiyoruz.
 ![Gösterim](Readme-Images/6.png)
 
