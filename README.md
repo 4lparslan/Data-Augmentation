@@ -19,4 +19,14 @@ Bu projede Data Augmentation için PyQt uygulaması geliştirdim.
 İşlemlere başlamadan önce verisetinizi gözden geçirin.
 ![Gösterim](Readme-Images/1.png)
 
-### Veriseti Görüntüleme Sayfası:
+### Augmentation Metotları Düzenleme Sayfası:
+Bu sayfada augmentation metotlarını ekleyebilir veya silebilirsiniz.
+![Gösterim](Readme-Images/5.png)
+
+### Augmentation Metotları Seçim Sayfası:
+Bu sayfada çeşitli metotları seçip parametre ayarlamaları yapabilirsiniz.
+![Gösterim](Readme-Images/1.5.png)
+
+### Örnek Augmentation Ayarlama Sayfası:
+Bu ekranda Blur sayfası örneğini görüyoruz.
+![Gösterim](Readme-Images/1.5.png)
