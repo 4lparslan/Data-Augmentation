@@ -29,7 +29,7 @@ Bu sayfada çeşitli metotları seçip parametre ayarlamaları yapabilirsiniz.
 ### Örnek Blur Ayarlama Sayfası:
 Bu ekranda Blur sayfası örneğini görüyoruz.
 ![Gösterim](Readme-Images/2.png)
-
+<br />
 ### Örnek-2 Sensitive-Rotation Ayarlama Sayfası:
 Bu ekranda Sensitive-Rotation sayfası örneğini görüyoruz.
 ![Gösterim](Readme-Images/3.png)
@@ -37,11 +37,11 @@ Bu ekranda Sensitive-Rotation sayfası örneğini görüyoruz.
 ### Örnek-3 Noise Ayarlama Sayfası:
 Bu ekranda Noise sayfası örneğini görüyoruz.
 ![Gösterim](Readme-Images/4.png)
-
+<br />
 ### Seçilenlere Tekrar Göz Atalım :
 Bu ekranda Noise sayfası örneğini görüyoruz.
 ![Gösterim](Readme-Images/5.png)
-
+<br />
 ### Çıktı Boyutunu ve Train-Test-Val Oranını Belirleme Sayfası :
 Bu sayfada çıktı olarak ne kadar veri oluşturulacağını ve train-validation-test oranını belirliyoruz. Ayrıca çıktı klasörünün nerede oluşturulacağını seçiyoruz.
 ![Gösterim](Readme-Images/6.png)
